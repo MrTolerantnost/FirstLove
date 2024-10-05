@@ -1,1 +1,56 @@
+//Firework Heart Animation in JavaScript
 
+const maxHearts = 10;  // Maximum number of hearts in the "explosion"
+const heartChar = '❤️';  // The heart character
+
+function createFirework() {
+    let height = 10;  // Starting height for the firework
+    let interval = setInterval(() => {
+        console.clear();  // Clear the console for animation effect
+        
+        // Firework ascending upwards
+        for (let i = 0; i < height; i++) {
+            console.log(' ');  // Empty space to simulate the height
+        }
+
+        // Heart explosion when the firework reaches the top
+        let hearts = '';
+        for (let i = 0; i < maxHearts; i++) {
+            hearts += heartChar + ' ';
+        }
+        console.log(hearts);  // Display the explosion
+
+        height--;  // Reduce height to simulate the firework rising
+
+        // End the firework animation when it "explodes"
+        if (height < 0) {
+            clearInterval(interval);  // Stop the animation after explosion
+            createFadeOut();  // Start the fade-out effect
+        }
+    }, 300);  // Adjust the speed of the firework
+}
+
+// Create a fade-out effect after the explosion
+function createFadeOut() {
+    let remainingHearts = maxHearts;
+    let fadeInterval = setInterval(() => {
+        console.clear();  // Clear the console for animation effect
+        
+        // Display the fading hearts
+        let hearts = '';
+        for (let i = 0; i < remainingHearts; i++) {
+            hearts += heartChar + ' ';
+        }
+        console.log(hearts);  // Display fading hearts
+        
+        remainingHearts--;  // Reduce the number of hearts
+        
+        // Stop when all hearts have disappeared
+        if (remainingHearts < 0) {
+            clearInterval(fadeInterval);
+        }
+    }, 300);  // Speed of the fading effect
+}
+
+// Start the heart firework animation
+createFirework();
